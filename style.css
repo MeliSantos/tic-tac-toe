@@ -1,21 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
+html, body {
+	background: #323232;
+	font-family: 'Open Sans', Arial, sans-serif;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+}
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
 .tic-tac-toe {
 	border-collapse: collapse;
 	margin: 40px auto;
 	font-size: 2.5rem;
-	box-shadow: 0 0 10px #aaa;
+	box-shadow: 0 0 10px #222;
+	background: transparent;
 }
 .tic-tac-toe td {
 	width: 80px;
 	height: 80px;
 	text-align: center;
 	vertical-align: middle;
-	border: 2px solid #333;
+	border: none;
+	border-right: 5px solid #fff;
+	border-bottom: 5px solid #fff;
 	cursor: pointer;
 	transition: background 0.2s;
+	color: #fff;
+}
+.tic-tac-toe tr td:last-child {
+	border-right: none;
+}
+.tic-tac-toe tr:last-child td {
+	border-bottom: none;
 }
 .tic-tac-toe td:hover {
-	background: #f0f0f0;
+	background: #444;
+}
+#content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 60vh;
 }
 #content {
 	display: flex;
