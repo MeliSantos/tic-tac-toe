@@ -1,0 +1,25 @@
+
+.tic-tac-toe {
+	border-collapse: collapse;
+	margin: 40px auto;
+	font-size: 2.5rem;
+	box-shadow: 0 0 10px #aaa;
+}
+.tic-tac-toe td {
+	width: 80px;
+	height: 80px;
+	text-align: center;
+	vertical-align: middle;
+	border: 2px solid #333;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.tic-tac-toe td:hover {
+	background: #f0f0f0;
+}
+#content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 60vh;
+}
