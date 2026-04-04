@@ -34,17 +34,27 @@ function getCrossSVG() {
         </svg>
         `;
 }
+
 let fields = [
-    'cross',
-    null,
-    'circle',
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
+    null, null, null,
+    null, null, null,
+    null, null, null
 ];
+
+let currentShape = 'circle';
+
+function handleCellClick(idx) {
+    if (fields[idx]) return;
+    fields[idx] = currentShape;
+    const td = document.getElementById('cell-' + idx);
+    if (currentShape === 'circle') {
+        td.innerHTML = getCircleSVG();
+    } else {
+        td.innerHTML = getCrossSVG();
+    }
+    td.onclick = null;
+    currentShape = currentShape === 'circle' ? 'cross' : 'circle';
+}
 
 function init() {
     render();
@@ -60,7 +70,8 @@ function render() {
             let display = '';
             if (value === 'circle') display = getCircleSVG();
             else if (value === 'cross') display = getCrossSVG();
-            table += `<td id="cell-${idx}">${display}</td>`;
+            let clickAttr = value ? '' : `onclick="handleCellClick(${idx})"`;
+            table += `<td id="cell-${idx}" ${clickAttr}>${display}</td>`;
         }
         table += '</tr>';
     }
