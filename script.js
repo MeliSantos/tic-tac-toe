@@ -12,7 +12,7 @@ function getCircleSVG() {
                 <animate
                     attributeName="stroke-dashoffset"
                     from="84.823" to="0"
-                    dur="0.7s"
+                    dur="0.4s"
                     fill="freeze"
                 />
             </circle>
@@ -53,7 +53,57 @@ function handleCellClick(idx) {
         td.innerHTML = getCrossSVG();
     }
     td.onclick = null;
-    currentShape = currentShape === 'circle' ? 'cross' : 'circle';
+    // Nach jedem Zug prüfen, ob das Spiel vorbei ist
+    const win = checkWin();
+    if (win) {
+        drawWinLine(win);
+        // Alle weiteren Klicks deaktivieren
+        for (let i = 0; i < 9; i++) {
+            document.getElementById('cell-' + i).onclick = null;
+        }
+    } else {
+        currentShape = currentShape === 'circle' ? 'cross' : 'circle';
+    }
+}
+
+function checkWin() {
+    const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8], // Reihen
+        [0,3,6], [1,4,7], [2,5,8], // Spalten
+        [0,4,8], [2,4,6]           // Diagonalen
+    ];
+    for (const pattern of winPatterns) {
+        const [a, b, c] = pattern;
+        if (fields[a] && fields[a] === fields[b] && fields[a] === fields[c]) {
+            return pattern;
+        }
+    }
+    return null;
+}
+
+function drawWinLine(pattern) {
+    // Ermittle die Positionen der Zellen
+    const first = document.getElementById('cell-' + pattern[0]);
+    const last = document.getElementById('cell-' + pattern[2]);
+    const table = first.closest('table');
+    const rect1 = first.getBoundingClientRect();
+    const rect2 = last.getBoundingClientRect();
+
+    // SVG-Linie über die Tabelle legen
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('style', 'position:absolute; pointer-events:none; left:0; top:0; width:100vw; height:100vh; z-index:10;');
+    svg.setAttribute('width', window.innerWidth);
+    svg.setAttribute('height', window.innerHeight);
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', rect1.left + rect1.width/2);
+    line.setAttribute('y1', rect1.top + rect1.height/2);
+    line.setAttribute('x2', rect2.left + rect2.width/2);
+    line.setAttribute('y2', rect2.top + rect2.height/2);
+    line.setAttribute('stroke', '#fff');
+    line.setAttribute('stroke-width', '4');
+    line.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(line);
+    document.body.appendChild(svg);
 }
 
 function init() {
