@@ -1,3 +1,12 @@
+function restartGame() {
+    // Felder zurücksetzen
+    for (let i = 0; i < fields.length; i++) fields[i] = null;
+    currentShape = 'circle';
+    // Gewinnlinie entfernen, falls vorhanden
+    const oldLine = document.querySelector('body > svg[style*="position:absolute"]');
+    if (oldLine) oldLine.remove();
+    render();
+}
 function getCircleSVG() {
         return `
         <svg width="42" height="42" viewBox="0 0 32 32" style="display:block;margin:auto;">

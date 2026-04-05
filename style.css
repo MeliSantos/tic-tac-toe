@@ -1,3 +1,22 @@
+#restart-btn {
+	background: linear-gradient(90deg, #00B0EF 0%, #FFC000 100%);
+	color: #323232;
+	border: none;
+	border-radius: 25px;
+	padding: 12px 32px;
+	font-size: 1.2rem;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-weight: 700;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+	transition: background 0.2s, color 0.2s, transform 0.1s;
+	margin-bottom: 10px;
+}
+#restart-btn:hover {
+	background: linear-gradient(90deg, #FFC000 0%, #00B0EF 100%);
+	color: #fff;
+	transform: scale(1.05);
+}
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
 html, body {
