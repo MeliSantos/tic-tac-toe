@@ -62,10 +62,22 @@ function handleCellClick(idx) {
         td.innerHTML = getCrossSVG();
     }
     td.onclick = null;
+    // Klicksound abspielen
+    const clickSound = document.getElementById('click-sound');
+    if (clickSound) {
+        clickSound.currentTime = 0;
+        clickSound.play();
+    }
     // Nach jedem Zug prüfen, ob das Spiel vorbei ist
     const win = checkWin();
     if (win) {
         drawWinLine(win);
+        // Gewinnsound abspielen
+        const winSound = document.getElementById('win-sound');
+        if (winSound) {
+            winSound.currentTime = 0;
+            winSound.play();
+        }
         // Alle weiteren Klicks deaktivieren
         for (let i = 0; i < 9; i++) {
             document.getElementById('cell-' + i).onclick = null;
